@@ -3,9 +3,9 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 
-type PageThemeName = 'home' | 'catalog' | 'editorial' | 'studio' | 'story' | 'saved' | 'cart' | 'account';
+type PageThemeName = 'home' | 'catalog' | 'editorial' | 'studio' | 'story' | 'saved' | 'cart' | 'account' | 'night';
 
-const THEMES = new Set<PageThemeName>(['home', 'catalog', 'editorial', 'studio', 'story', 'saved', 'cart', 'account']);
+const THEMES = new Set<PageThemeName>(['home', 'catalog', 'editorial', 'studio', 'story', 'saved', 'cart', 'account', 'night']);
 
 function isPageTheme(value: string | null): value is PageThemeName {
   return value !== null && THEMES.has(value as PageThemeName);
@@ -37,7 +37,7 @@ export default function PageTheme({ children }: { children: ReactNode }) {
         .filter((entry) => entry.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
       const nextTheme = current?.target.getAttribute('data-theme-section') ?? null;
-      if (isPageTheme(nextTheme)) setSectionTheme(nextTheme);
+      if (isPageTheme(nextTheme)) setSectionTheme(nextTheme === 'story' ? 'night' : nextTheme);
     }, {
       rootMargin: '-40% 0px -40% 0px',
       threshold: [0, 0.15, 0.4]

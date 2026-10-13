@@ -117,11 +117,19 @@ body { margin: 0; font-family: var(--font-sans); background: var(--paper); color
 .sq-burger i { display: block; height: 1.5px; background: var(--ink); } .sq-burger i:last-child { width: 60%; justify-self: end; }
 
 /* ---------- LogoStrip ---------- */
-.sq-ls { display: flex; gap: var(--space-3); overflow: hidden; padding: var(--space-6) 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.sq-ls { overflow: hidden; padding: var(--space-6) 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.sq-ls-track { display: flex; width: max-content; animation: sq-ls-marquee 28s linear infinite; will-change: transform; }
+.sq-ls-group { display: flex; flex: none; gap: var(--space-3); padding-right: var(--space-3); }
+@keyframes sq-ls-marquee { to { transform: translate3d(-25%, 0, 0); } }
 .sq-ls-tile { flex: none; width: 200px; height: 112px; background: var(--surface); transform: skewX(-18deg); display: grid; place-items: center; }
 .sq-ls-tile > * { transform: skewX(18deg); }
 .sq-ls-tile img { max-width: 132px; max-height: 40px; }
 .sq-ls-name { font-family: var(--font-sans); font-weight: 700; font-size: 16px; color: var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .sq-ls { overflow-x: auto; scrollbar-width: thin; -webkit-mask-image: none; mask-image: none; }
+  .sq-ls-track { animation: none; transform: none; }
+  .sq-ls-group[aria-hidden="true"] { display: none; }
+}
 
 /* ---------- TemplateCard ---------- */
 .sq-card { width: 260px; background: var(--surface-raised); border-radius: var(--radius-md); overflow: hidden; color: var(--ink); text-decoration: none; display: block; transition: box-shadow .2s ease, transform .2s ease; border: 1px solid var(--line); }

@@ -248,6 +248,31 @@
   --focus: #9f4128;
 }
 
+/* Keep the landing palette at the top, then use one readable black theme throughout the scroll. */
+.page-theme[data-page-theme='night'] {
+  --paper: #000000;
+  --surface: #111111;
+  --surface-raised: #191919;
+  --line: #343434;
+  --ink: #f4f1ee;
+  --ink-muted: #b8b4b0;
+  --ink-glow: #ffffff;
+  --rust: #bc4324;
+  --rust-glow: #d4603f;
+  --rust-deep: #8f2f17;
+  --rust-text: #e8775a;
+  --rust-soft: #3a221b;
+  --rust-soft-glow: #4d2c22;
+  --on-rust-soft: #f7dcd2;
+  --peach-100: #1d1917;
+  --peach-200: #29211e;
+  --peach-300: #382720;
+  --frost: rgba(255, 255, 255, .08);
+  --frost-edge: rgba(255, 255, 255, .18);
+  --frost-media: rgba(255, 255, 255, .12);
+  --focus: #e8775a;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .page-theme { transition-duration: 0ms; }
 }

@@ -3,7 +3,6 @@
 import { useEffect, useState, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ElementType, type ReactNode } from 'react';
 import Link from 'next/link';
 import FlipCard from './FlipCard';
-import SlideCommit from './SlideCommit';
 import { ICONS, type IconName } from './icons';
 import { formatPrice, type Template, type Tint } from '@/data/templates';
 import { useSavedTemplates } from './SavedTemplatesProvider';
@@ -235,9 +234,20 @@ export function NavBar({ logoSrc, links = [], cta, className }: {
 }
 
 export function LogoStrip({ items, label = 'Partners' }: { items: string[]; label?: string }) {
+  const renderItems = (copy = false) => items.map((name, index) => (
+    <div key={`${copy ? 'copy-' : ''}${name}-${index}`} className="sq-ls-tile" role="listitem">
+      <span className="sq-ls-name">{name}</span>
+    </div>
+  ));
+
   return (
-    <div className="sq-ls" role="list" aria-label={label}>
-      {items.map((name) => <div key={name} className="sq-ls-tile" role="listitem"><span className="sq-ls-name">{name}</span></div>)}
+    <div className="sq-ls" role="region" aria-label={label}>
+      <div className="sq-ls-track">
+        <div className="sq-ls-group" role="list" aria-label={label}>{renderItems()}</div>
+        {[0, 1, 2].map((copy) => (
+          <div className="sq-ls-group" aria-hidden="true" key={`copy-${copy}`}>{renderItems(true)}</div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -255,9 +265,23 @@ const TABS: Array<{ name: TabName; href: string }> = [
   { name: 'Saved', href: '/saved/' }, { name: 'Account', href: '/account/' }
 ];
 
-export function TabBar({ current }: { current: TabName }) {
+export function TabBar({ current, hideUntilHeroPassed = false }: { current: TabName; hideUntilHeroPassed?: boolean }) {
+  const [heroVisible, setHeroVisible] = useState(hideUntilHeroPassed);
+
+  useEffect(() => {
+    if (!hideUntilHeroPassed) return;
+    const hero = document.querySelector('.page-home .hero');
+    if (!hero || !('IntersectionObserver' in window)) {
+      setHeroVisible(false);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => setHeroVisible(entry.isIntersecting), { threshold: 0 });
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [hideUntilHeroPassed]);
+
   return (
-    <nav aria-label="App" className="tabbar sq-glass sq-tone-frost">
+    <nav aria-label="App" className={cx('tabbar sq-glass sq-tone-frost', hideUntilHeroPassed && heroVisible && 'is-hero-hidden')}>
       {TABS.map(({ name, href }) => (
         <Link key={name} className="tab" href={href} aria-current={current === name ? 'page' : undefined}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{TAB_ICONS[name]}</svg>
@@ -272,6 +296,7 @@ export function TabBar({ current }: { current: TabName }) {
 export function TemplateCard({ t, compact = false }: { t: Template; compact?: boolean }) {
   const { savedIds, toggleSaved } = useSavedTemplates();
   const { cartIds, addToCart } = useCart();
+  const [detailsShown, setDetailsShown] = useState(false);
   const saved = savedIds.includes(t.id);
   const inCart = cartIds.includes(t.id);
   const discovery = t.age <= 2
@@ -284,6 +309,8 @@ export function TemplateCard({ t, compact = false }: { t: Template; compact?: bo
       <div className="sq-card-art" style={{ background: t.tint }}>
         <FlipCard
           className="template-flip-card"
+          flipped={detailsShown}
+          onFlipChange={setDetailsShown}
           ariaLabel={`Flip ${t.title} preview for details`}
           axis="y"
           flipOnClick
@@ -321,6 +348,12 @@ export function TemplateCard({ t, compact = false }: { t: Template; compact?: bo
             </div>
           )}
         />
+        <div className="sq-card-discovery" data-kind={discovery.kind}>
+          <span className="sq-card-discovery__mark" aria-hidden="true">
+            {discovery.kind === 'new' ? '✦' : discovery.kind === 'popular' ? '↗' : <Icon name="edit" />}
+          </span>
+          <span className="sq-card-discovery__label">{discovery.label}</span>
+        </div>
         <button type="button" aria-pressed={saved} aria-label={saved ? 'Remove from saved' : 'Save template'}
           className={cx('sq-card-fav sq-ib sq-glass sq-press sq-focus', saved ? 'sq-tone-rust' : 'sq-tone-frost')}
           onClick={() => toggleSaved(t.id)}>
@@ -333,29 +366,39 @@ export function TemplateCard({ t, compact = false }: { t: Template; compact?: bo
           <span>{t.meta ?? `${t.style} · ${t.category.replace(/s$/, '')}`}</span>
           <span className="sq-card-price">{formatPrice(t.price)}</span>
         </div>
-        <div className="sq-card-discovery" data-kind={discovery.kind}>
-          <span className="sq-card-discovery__mark" aria-hidden="true">
-            {discovery.kind === 'new' ? '✦' : discovery.kind === 'popular' ? '↗' : <Icon name="edit" />}
-          </span>
-          <span>{discovery.label}</span>
+        <div className="sq-card-actions">
+          <button
+            type="button"
+            className="sq-card-add"
+            aria-label={inCart ? `${t.title} added to cart` : `Add ${t.title} to cart`}
+            disabled={inCart}
+            onClick={() => addToCart(t.id)}
+          >
+            <span className="sq-card-add__icon" aria-hidden="true">
+              {inCart ? (
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="m5 12 4.5 4.5L19 7" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M3 3h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6" />
+                  <circle cx="10" cy="20" r="1.4" />
+                  <circle cx="18" cy="20" r="1.4" />
+                </svg>
+              )}
+            </span>
+            <span className="sq-card-add__label" data-added={inCart || undefined}>{inCart ? 'Added to cart' : 'Add to cart'}</span>
+          </button>
+          <button
+            type="button"
+            className="sq-card-more"
+            aria-label={detailsShown ? `Show ${t.title} preview` : `View ${t.title} details`}
+            aria-pressed={detailsShown}
+            onClick={() => setDetailsShown(value => !value)}
+          >
+            <Icon name="arrow-forward" />
+          </button>
         </div>
-        <SlideCommit
-          label={inCart ? 'In your cart' : 'Slide to add'}
-          doneLabel="Added to cart"
-          errorLabel="Could not add"
-          disabled={inCart}
-          onConfirm={() => addToCart(t.id)}
-          trackColor="#5a2a1e"
-          handleColor="#ffe9d4"
-          successColor="#bc4324"
-          dangerColor="#9a3024"
-          width={196}
-          height={44}
-          radius={22}
-          holdMs={0}
-          fluid
-          className="sq-card-add"
-        />
       </div>
     </article>
   );
