@@ -4,6 +4,7 @@ import {
 } from '@/components/ui';
 import { TEMPLATES, TINTS, PRESS, type Template } from '@/data/templates';
 import SiteFooter from '@/components/SiteFooter';
+import StaggeredText from '@/components/StaggeredText';
 
 const OCCASION_LINKS = [
   { label: 'Wedding invitations', href: '/templates/' },
@@ -37,7 +38,7 @@ export default function Home() {
             <div className="hero-top">
               <div className="hero-copy">
                 <span className="hero-eyebrow">• Wedding invitations</span>
-                <h1>Wedding invites,<br />made to matter</h1>
+                <StaggeredText />
                 <p>1000SQUARES is a marketplace of beautifully designed templates. Pick a design, make it yours, and send it the same day.</p>
                 <div className="hero-ctas">
                   <Button tone="rust" size="lg" iconEnd="arrow-forward" href="/templates/">Browse templates</Button>
