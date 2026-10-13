@@ -6,6 +6,8 @@ type StaggeredTextProps = {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 };
 
+type StaggeredTextStyle = CSSProperties & { '--stagger-delay': string };
+
 const DEFAULT_TEXT = 'Wedding invites,\nmade to matter';
 
 export default function StaggeredText({
@@ -30,7 +32,7 @@ export default function StaggeredText({
                 <Fragment key={`word-${lineIndex}-${wordIndex}`}>
                   <span
                     className="staggered-text__word"
-                    style={{ '--stagger-index': index } as CSSProperties}
+                    style={{ '--stagger-delay': `${index * 80}ms` } as StaggeredTextStyle}
                   >
                     {word}
                   </span>

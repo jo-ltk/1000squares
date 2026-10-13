@@ -51,11 +51,15 @@ export default function Home() {
             </div>
             <div className="hero-spacer" />
             <div className="rule" />
-            <div className="hero-title">
+            <div className="hero-title hero-title-desktop">
               <HeroTitle as="p" size="xl" lines={['Designed', { image: '/images/handshake.jpg', alt: 'Two hands clasped' }, 'to say I do']} />
             </div>
           </div>
         </section>
+
+        <div className="container hero-title-mobile">
+          <HeroTitle as="p" size="l" lines={['Designed', { image: '/images/handshake.jpg', alt: 'Two hands clasped' }, 'to say I do']} />
+        </div>
 
         <section className="container section" data-theme-section="catalog">
           <SectionHeader eyebrow="Trending now" title="Templates couples love" />
