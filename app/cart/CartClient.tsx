@@ -2,6 +2,8 @@
 
 import { useMemo } from 'react';
 import { Button, HeroTitle, NavBar, TabBar } from '@/components/ui';
+import StaggeredText from '@/components/StaggeredText';
+import TextReveal from '@/components/TextReveal';
 import SiteFooter from '@/components/SiteFooter';
 import { useCart } from '@/components/CartProvider';
 import { formatPrice, TEMPLATES } from '@/data/templates';
@@ -26,7 +28,7 @@ export default function CartClient() {
         <section className="container cart-main">
           <div className="cart-heading">
             <HeroTitle size="l" lines={['Your cart']} />
-            <p>{items.length} {items.length === 1 ? 'template' : 'templates'} ready for your next celebration.</p>
+            <p><TextReveal delay={100}>{items.length} {items.length === 1 ? 'template' : 'templates'} ready for your next celebration.</TextReveal></p>
           </div>
 
           {items.length ? (
@@ -60,8 +62,8 @@ export default function CartClient() {
           ) : (
             <div className="cart-empty">
               <span className="cart-empty-mark" aria-hidden="true">＋</span>
-              <h2>Your cart is waiting</h2>
-              <p>Slide on a template card to add a design you love.</p>
+              <StaggeredText as="h2" text="Your cart is waiting" />
+              <p><TextReveal>Slide on a template card to add a design you love.</TextReveal></p>
               <Button tone="rust" iconEnd="arrow-forward" href="/templates/">Browse templates</Button>
             </div>
           )}

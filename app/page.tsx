@@ -5,6 +5,7 @@ import {
 import { TEMPLATES, TINTS, PRESS, type Template } from '@/data/templates';
 import SiteFooter from '@/components/SiteFooter';
 import StaggeredText from '@/components/StaggeredText';
+import TextReveal from '@/components/TextReveal';
 
 const OCCASION_LINKS = [
   { label: 'Wedding invitations', href: '/templates/' },
@@ -88,8 +89,8 @@ export default function Home() {
                 <li key={step.n}>
                   <span className="step-n">{step.n}</span>
                   <div>
-                    <h3>{step.title}</h3>
-                    <p>{step.body}</p>
+                    <StaggeredText as="h3" text={step.title} />
+                    <p><TextReveal delay={80}>{step.body}</TextReveal></p>
                   </div>
                 </li>
               ))}
@@ -116,8 +117,8 @@ export default function Home() {
           <div className="about">
             <img src="/images/handshake.jpg" alt="Two people clasping hands under a clear sky" />
             <div className="about-copy">
-              <p className="lead">At 1000SQUARES we pair studio-grade design with tools anyone can use. Every template is made by working designers, then handed to you to change the words, the colours and the details until it feels like yours.</p>
-              <p className="muted">Wedding invitations are where we start. Birthdays, events and more digital products are on the way.</p>
+              <p className="lead"><TextReveal>At 1000SQUARES we pair studio-grade design with tools anyone can use. Every template is made by working designers, then handed to you to change the words, the colours and the details until it feels like yours.</TextReveal></p>
+              <p className="muted"><TextReveal delay={100}>Wedding invitations are where we start. Birthdays, events and more digital products are on the way.</TextReveal></p>
               <div><CtaButton tone="rust" href="#about-us">Our story</CtaButton></div>
             </div>
           </div>

@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Button, HeroTitle, NavBar, TemplateCard, TintSwatch, TabBar } from '@/components/ui';
 import JellyRadio from '@/components/JellyRadio';
+import StaggeredText from '@/components/StaggeredText';
+import TextReveal from '@/components/TextReveal';
 import SiteFooter from '@/components/SiteFooter';
 import { OCCASIONS, STYLES, TEMPLATES, TINTS, type Occasion, type Template, type TemplateFormat } from '@/data/templates';
 
@@ -135,7 +137,7 @@ export default function ListingClient() {
             </nav>
             <div className="l-hero-row">
               <HeroTitle size="l" lines={[occasion === 'All' ? 'All templates' : occasion]} />
-              <p>Invitations designed by working designers. Change every word and colour, then print or send digitally.</p>
+              <p><TextReveal delay={100}>Invitations designed by working designers. Change every word and colour, then print or send digitally.</TextReveal></p>
             </div>
             <div className="pills">
               <JellyRadio
@@ -194,8 +196,8 @@ export default function ListingClient() {
               </>
             ) : (
               <div className="empty">
-                <h2>No templates match</h2>
-                <p>Try another occasion or clear a filter.</p>
+                <StaggeredText as="h2" text="No templates match" />
+                <p><TextReveal>Try another occasion or clear a filter.</TextReveal></p>
                 <Button tone="soft" onClick={clearAll}>Clear filters</Button>
               </div>
             )}

@@ -3,6 +3,8 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Button, HeroTitle, IconButton, TabBar, TemplateCard } from '@/components/ui';
+import StaggeredText from '@/components/StaggeredText';
+import TextReveal from '@/components/TextReveal';
 import { useSavedTemplates } from '@/components/SavedTemplatesProvider';
 import { TEMPLATES } from '@/data/templates';
 
@@ -45,7 +47,7 @@ export default function SavedClient() {
         <section className="saved-hero">
           <span className="mobile-eyebrow">• Your collection</span>
           <HeroTitle size="l" lines={['Saved']} />
-          <p>Templates you love and designs you started. Pick up where you left off.</p>
+          <p><TextReveal delay={100}>Templates you love and designs you started. Pick up where you left off.</TextReveal></p>
           <div className="saved-segment" role="tablist" aria-label="Saved items">
             <button type="button" role="tab" aria-selected={activeTab === 'templates'} onClick={() => setActiveTab('templates')}>
               Templates · {savedTemplates.length}
@@ -68,8 +70,8 @@ export default function SavedClient() {
               </div>
             ) : (
               <div className="mobile-empty">
-                <h2>Your collection is ready</h2>
-                <p>Tap the heart on a template to save it here.</p>
+                <StaggeredText as="h2" text="Your collection is ready" />
+                <p><TextReveal>Tap the heart on a template to save it here.</TextReveal></p>
                 <Button tone="rust" href="/templates/">Explore templates</Button>
               </div>
             )}
@@ -104,7 +106,7 @@ export default function SavedClient() {
         )}
 
         <section className="saved-recommendations">
-          <div className="saved-recommendations-title"><h2>You might also like</h2><Link href="/templates/">See all</Link></div>
+          <div className="saved-recommendations-title"><StaggeredText as="h2" text="You might also like" /><Link href="/templates/">See all</Link></div>
           <div className="rail" role="list" aria-label="Recommended templates">
             {recommendations.map((template) => (
               <div key={template.id} role="listitem"><TemplateCard t={template} /></div>

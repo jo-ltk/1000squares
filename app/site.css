@@ -115,6 +115,7 @@ a:hover { color: var(--rust-deep); }
 .hero-copy p { margin: 0; font-size: clamp(15px, .45vw + 9px, 20px); line-height: 1.5; max-width: clamp(300px, 26vw, 520px); }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 8px; }
 .hero-index { width: clamp(260px, 20vw, 400px); max-width: 100%; }
+.text-reveal { display: block; }
 .hero .sq-il-title, .hero .sq-il li, .hero .sq-il .sq-num { color: #fff; }
 .hero .sq-il-title { font-size: clamp(14px, .8vw, 18px); }
 .hero .sq-il li { border-color: rgba(255,255,255,.4); font-size: clamp(12px, .7vw, 15px); padding: clamp(12px, .85vw, 18px) 0; }
@@ -329,6 +330,18 @@ a:hover { color: var(--rust-deep); }
   html { scroll-behavior: smooth; }
   .hero .sq-nav { animation: sq-fade-in .7s var(--ease-out) both; }
   .hero-copy > *:not(.staggered-text) { animation: sq-rise-in .8s var(--ease-out) both; }
+  .sq-hero[data-text-reveal-ready="true"]:not([data-text-reveal-visible="true"]) {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  .sq-hero[data-text-reveal-visible="true"] { animation: sq-rise-in .9s var(--ease-out) both; }
+  .text-reveal[data-text-reveal-ready="true"]:not([data-text-reveal-visible="true"]) {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  .text-reveal[data-text-reveal-visible="true"] {
+    animation: sq-rise-in .72s var(--ease-out) var(--text-reveal-delay, 0ms) both;
+  }
   .staggered-text[data-staggered-ready="true"]:not([data-staggered-visible="true"]) .staggered-text__word {
     opacity: 0;
     transform: translate3d(0, .42em, 0);
@@ -339,7 +352,6 @@ a:hover { color: var(--rust-deep); }
   }
   .hero-copy > :nth-child(2) { animation-delay: .08s; } .hero-copy > :nth-child(3) { animation-delay: .18s; } .hero-copy > :nth-child(4) { animation-delay: .28s; }
   .hero-index { animation: sq-rise-in .8s var(--ease-out) .38s both; }
-  .hero .sq-hero { animation: sq-rise-in .9s var(--ease-out) .48s both; }
   .l-hero-inner > * { animation: sq-rise-in .8s var(--ease-out) both; }
   .l-hero-inner > :nth-child(2) { animation-delay: .1s; } .l-hero-inner > :nth-child(3) { animation-delay: .2s; }
   .filters { animation: sq-rise-in .8s var(--ease-out) .3s both; }

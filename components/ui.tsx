@@ -3,6 +3,8 @@
 import { useEffect, useState, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ElementType, type ReactNode } from 'react';
 import Link from 'next/link';
 import FlipCard from './FlipCard';
+import StaggeredText from './StaggeredText';
+import { useScrollReveal } from './useScrollReveal';
 import { ICONS, type IconName } from './icons';
 import { formatPrice, type Template, type Tint } from '@/data/templates';
 import { useSavedTemplates } from './SavedTemplatesProvider';
@@ -132,7 +134,7 @@ export function SectionHeader({ eyebrow, title, action }: {
   return (
     <header className="sq-sh">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2>{title}</h2>
+      <StaggeredText as="h2" text={title} />
       {action || <span />}
     </header>
   );
@@ -145,11 +147,17 @@ export function HeroTitle({ lines, size = 'xl', as: Tag = 'h1', className }: {
   as?: ElementType;
   className?: string;
 }) {
+  const { ref: revealRef, ready, visible } = useScrollReveal<HTMLSpanElement>();
+
   return (
-    <Tag className={cx('sq-hero', `sq-hero-${size}`, className)}>
+    <Tag
+      className={cx('sq-hero', `sq-hero-${size}`, className)}
+      data-text-reveal-ready={ready}
+      data-text-reveal-visible={visible}
+    >
       {lines.map((line, index) => typeof line === 'string'
-        ? <span key={index}>{line}</span>
-        : <span key={index} className="sq-hero-chip" role={line.alt ? 'img' : undefined} aria-label={line.alt || undefined}
+        ? <span key={index} ref={index === 0 ? revealRef : undefined}>{line}</span>
+        : <span key={index} ref={index === 0 ? revealRef : undefined} className="sq-hero-chip" role={line.alt ? 'img' : undefined} aria-label={line.alt || undefined}
             style={line.image ? { backgroundImage: `url(${line.image})` } : { background: line.color }} />)}
     </Tag>
   );

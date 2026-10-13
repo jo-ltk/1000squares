@@ -1,6 +1,7 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState, type CSSProperties } from 'react';
+import { Fragment, type CSSProperties } from 'react';
+import { useScrollReveal } from './useScrollReveal';
 
 type StaggeredTextProps = {
   text?: string;
@@ -18,47 +19,15 @@ export default function StaggeredText({
   as = 'h1'
 }: StaggeredTextProps) {
   const Tag = as;
-  const contentRef = useRef<HTMLSpanElement | null>(null);
-  const [isReady, setIsReady] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const { ref: contentRef, ready, visible } = useScrollReveal<HTMLSpanElement>();
   let staggerIndex = 0;
-
-  useEffect(() => {
-    const content = contentRef.current;
-    if (!content) return;
-
-    setIsReady(true);
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setIsVisible(true);
-      return;
-    }
-
-    if (!('IntersectionObserver' in window)) {
-      setIsVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, rootMargin: '0px' }
-    );
-
-    observer.observe(content);
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <Tag
       className={`staggered-text ${className}`.trim()}
       aria-label={text.replace(/\s+/g, ' ').trim()}
-      data-staggered-ready={isReady}
-      data-staggered-visible={isVisible}
+      data-staggered-ready={ready}
+      data-staggered-visible={visible}
     >
       <span ref={contentRef} className="staggered-text__content" aria-hidden="true">
         {text.split(/\r?\n/).map((line, lineIndex) => {

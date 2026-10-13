@@ -3,6 +3,8 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import Link from 'next/link';
 import { Button, CtaButton, TabBar } from '@/components/ui';
+import StaggeredText from '@/components/StaggeredText';
+import TextReveal from '@/components/TextReveal';
 
 const ORDERS = [
   { title: 'Quiet linen', id: '#SQ-1042', date: '08 Oct 2026', price: '₹349', tint: '#f2f1ef', status: 'Downloaded', statusClass: '' },
@@ -92,7 +94,7 @@ export default function AccountClient() {
                 </form>
               ) : (
                 <>
-                  <h1>{name}</h1>
+                  <StaggeredText as="h1" text={name} />
                   <span>{email}</span>
                   <span className="account-member-pill">Member since Aug 2026</span>
                 </>
@@ -112,8 +114,8 @@ export default function AccountClient() {
 
         <section className="account-promo sq-glass sq-tone-ink">
           <span className="account-promo-eyebrow">• 1000SQUARES Pro</span>
-          <h2>Unlimited templates for your whole wedding</h2>
-          <p>Every invite, save-the-date and menu card for ₹1,999. One-time payment.</p>
+          <StaggeredText as="h2" text="Unlimited templates for your whole wedding" />
+          <p><TextReveal delay={100}>Every invite, save-the-date and menu card for ₹1,999. One-time payment.</TextReveal></p>
           <div><CtaButton tone="rust" href="/templates/">Explore templates</CtaButton></div>
         </section>
 
