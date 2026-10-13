@@ -291,6 +291,7 @@ a:hover { color: var(--rust-deep); }
   .cart-item-info p { font-size: 11px; }
   .cart-item > .sq-btn { padding-inline: 10px; font-size: 10px; }
   .hide-sm { display: none; }
+  .section[data-theme-section="catalog"] > .sq-sh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .hero-copy { max-width: 100%; }
   .hero-ctas .sq-btn:first-child { flex-grow: 1.35; }
   .show-sm { display: inline; }
