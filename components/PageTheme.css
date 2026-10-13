@@ -1,0 +1,253 @@
+@property --paper { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --surface { syntax: '<color>'; inherits: true; initial-value: #f2f1ef; }
+@property --surface-raised { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: #e6e1dc; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: #121212; }
+@property --ink-muted { syntax: '<color>'; inherits: true; initial-value: #6b6763; }
+@property --ink-glow { syntax: '<color>'; inherits: true; initial-value: #3a3836; }
+@property --rust { syntax: '<color>'; inherits: true; initial-value: #bc4324; }
+@property --rust-glow { syntax: '<color>'; inherits: true; initial-value: #d4603f; }
+@property --rust-deep { syntax: '<color>'; inherits: true; initial-value: #8f2f17; }
+@property --rust-text { syntax: '<color>'; inherits: true; initial-value: #bc4324; }
+@property --rust-soft { syntax: '<color>'; inherits: true; initial-value: #ffe1cc; }
+@property --rust-soft-glow { syntax: '<color>'; inherits: true; initial-value: #fff1e4; }
+@property --on-rust-soft { syntax: '<color>'; inherits: true; initial-value: #5a2a1e; }
+@property --peach-100 { syntax: '<color>'; inherits: true; initial-value: #ffe9d4; }
+@property --peach-200 { syntax: '<color>'; inherits: true; initial-value: #ffe1cc; }
+@property --peach-300 { syntax: '<color>'; inherits: true; initial-value: #ffd0b4; }
+@property --frost { syntax: '<color>'; inherits: true; initial-value: rgba(255, 255, 255, .62); }
+@property --frost-edge { syntax: '<color>'; inherits: true; initial-value: rgba(255, 255, 255, .9); }
+@property --frost-media { syntax: '<color>'; inherits: true; initial-value: rgba(255, 255, 255, .78); }
+@property --focus { syntax: '<color>'; inherits: true; initial-value: #bc4324; }
+
+.page-theme {
+  min-height: 100vh;
+  color: var(--ink);
+  background-color: var(--paper);
+  transition:
+    --paper 520ms ease,
+    --surface 520ms ease,
+    --surface-raised 520ms ease,
+    --line 520ms ease,
+    --ink 520ms ease,
+    --ink-muted 520ms ease,
+    --ink-glow 520ms ease,
+    --rust 520ms ease,
+    --rust-glow 520ms ease,
+    --rust-deep 520ms ease,
+    --rust-text 520ms ease,
+    --rust-soft 520ms ease,
+    --rust-soft-glow 520ms ease,
+    --on-rust-soft 520ms ease,
+    --peach-100 520ms ease,
+    --peach-200 520ms ease,
+    --peach-300 520ms ease,
+    --frost 520ms ease,
+    --frost-edge 520ms ease,
+    --frost-media 520ms ease,
+    --focus 520ms ease,
+    color 520ms ease,
+    background-color 520ms ease;
+}
+
+/* Warm ivory and terracotta for the landing page. */
+.page-theme[data-page-theme='home'] {
+  --paper: #fff8f4;
+  --surface: #f5ebe5;
+  --surface-raised: #fffdfa;
+  --line: #ead8ce;
+  --ink: #2c221e;
+  --ink-muted: #6c5c56;
+  --ink-glow: #4a3730;
+  --rust: #bc4324;
+  --rust-glow: #d4603f;
+  --rust-deep: #8f2f17;
+  --rust-text: #a93d24;
+  --rust-soft: #f7dfd4;
+  --rust-soft-glow: #fff1e8;
+  --on-rust-soft: #54291f;
+  --peach-100: #ffede2;
+  --peach-200: #ffe1cc;
+  --peach-300: #ffd0b4;
+  --frost: rgba(255, 255, 255, .64);
+  --frost-edge: rgba(255, 255, 255, .92);
+  --frost-media: rgba(255, 255, 255, .8);
+  --focus: #a93d24;
+}
+
+/* Pale sage gives the product catalogue a calm studio-paper backdrop. */
+.page-theme[data-page-theme='catalog'] {
+  --paper: #f3f6f0;
+  --surface: #e8eee7;
+  --surface-raised: #fbfcf9;
+  --line: #d9e2d9;
+  --ink: #252d27;
+  --ink-muted: #5e6a61;
+  --ink-glow: #455348;
+  --rust: #ad4c34;
+  --rust-glow: #cb765b;
+  --rust-deep: #7e3524;
+  --rust-text: #9d442f;
+  --rust-soft: #f0dcd2;
+  --rust-soft-glow: #f8ece4;
+  --on-rust-soft: #593327;
+  --peach-100: #e9efe5;
+  --peach-200: #e0e8db;
+  --peach-300: #d5e0d2;
+  --frost: rgba(250, 253, 248, .66);
+  --frost-edge: rgba(255, 255, 255, .94);
+  --frost-media: rgba(250, 253, 248, .82);
+  --focus: #9d442f;
+}
+
+/* A muted rose palette is reserved for press and editorial content. */
+.page-theme[data-page-theme='editorial'] {
+  --paper: #faf4f4;
+  --surface: #f1e6e7;
+  --surface-raised: #fffafa;
+  --line: #e7d9db;
+  --ink: #302426;
+  --ink-muted: #706165;
+  --ink-glow: #49373b;
+  --rust: #ad4940;
+  --rust-glow: #ce7165;
+  --rust-deep: #81352e;
+  --rust-text: #a54339;
+  --rust-soft: #f3dfdd;
+  --rust-soft-glow: #faecea;
+  --on-rust-soft: #5c2b2a;
+  --peach-100: #f2e2e1;
+  --peach-200: #ecd7d7;
+  --peach-300: #e3c9c9;
+  --frost: rgba(255, 250, 250, .66);
+  --frost-edge: rgba(255, 255, 255, .94);
+  --frost-media: rgba(255, 250, 250, .82);
+  --focus: #a54339;
+}
+
+/* Soft olive and oat tones make the customisation section feel like a worktable. */
+.page-theme[data-page-theme='studio'] {
+  --paper: #f8f6ec;
+  --surface: #eeecdf;
+  --surface-raised: #fffdf6;
+  --line: #e0dccb;
+  --ink: #2b2a22;
+  --ink-muted: #696756;
+  --ink-glow: #48473b;
+  --rust: #b5532d;
+  --rust-glow: #d07248;
+  --rust-deep: #843a20;
+  --rust-text: #a44929;
+  --rust-soft: #f4e2d1;
+  --rust-soft-glow: #fbf1e4;
+  --on-rust-soft: #5d3825;
+  --peach-100: #f1eddd;
+  --peach-200: #e9e4d1;
+  --peach-300: #e0dac4;
+  --frost: rgba(255, 253, 246, .66);
+  --frost-edge: rgba(255, 255, 255, .94);
+  --frost-media: rgba(255, 253, 246, .82);
+  --focus: #a44929;
+}
+
+/* A warmer sand palette closes the landing page story. */
+.page-theme[data-page-theme='story'] {
+  --paper: #f7f1e8;
+  --surface: #eee5d9;
+  --surface-raised: #fdf9f3;
+  --line: #e3d7c9;
+  --ink: #2b231e;
+  --ink-muted: #706256;
+  --ink-glow: #49392f;
+  --rust: #b04b2d;
+  --rust-glow: #cf6c4c;
+  --rust-deep: #803720;
+  --rust-text: #a34127;
+  --rust-soft: #f4dfd2;
+  --rust-soft-glow: #fbf0e5;
+  --on-rust-soft: #593020;
+  --peach-100: #f4e7d8;
+  --peach-200: #edddca;
+  --peach-300: #e5d1b9;
+  --frost: rgba(253, 249, 243, .66);
+  --frost-edge: rgba(255, 255, 255, .92);
+  --frost-media: rgba(253, 249, 243, .82);
+  --focus: #a34127;
+}
+
+/* Separate route palettes keep saved, cart, and account areas easy to recognise. */
+.page-theme[data-page-theme='saved'] {
+  --paper: #faf3f2;
+  --surface: #f1e7e6;
+  --surface-raised: #fffafa;
+  --line: #e6d8da;
+  --ink: #2e2427;
+  --ink-muted: #6e6064;
+  --ink-glow: #48383c;
+  --rust: #ad463d;
+  --rust-glow: #cb6c62;
+  --rust-deep: #7d332f;
+  --rust-text: #a24038;
+  --rust-soft: #f3dddd;
+  --rust-soft-glow: #f9ebea;
+  --on-rust-soft: #5d2b2c;
+  --peach-100: #f2e2e1;
+  --peach-200: #ebd6d6;
+  --peach-300: #e2c9ca;
+  --frost: rgba(255, 250, 250, .66);
+  --frost-edge: rgba(255, 255, 255, .94);
+  --frost-media: rgba(255, 250, 250, .82);
+  --focus: #a24038;
+}
+
+.page-theme[data-page-theme='cart'] {
+  --paper: #f3f6f1;
+  --surface: #e7eee8;
+  --surface-raised: #fafcf8;
+  --line: #d6e0d8;
+  --ink: #242d27;
+  --ink-muted: #5d6a60;
+  --ink-glow: #46534a;
+  --rust: #a95036;
+  --rust-glow: #c87458;
+  --rust-deep: #793724;
+  --rust-text: #98452f;
+  --rust-soft: #efe1d2;
+  --rust-soft-glow: #f8f0e4;
+  --on-rust-soft: #533b29;
+  --peach-100: #e8eee3;
+  --peach-200: #dfe8dd;
+  --peach-300: #d3e0d4;
+  --frost: rgba(250, 253, 248, .66);
+  --frost-edge: rgba(255, 255, 255, .94);
+  --frost-media: rgba(250, 253, 248, .82);
+  --focus: #98452f;
+}
+
+.page-theme[data-page-theme='account'] {
+  --paper: #f4f1e9;
+  --surface: #eae5d9;
+  --surface-raised: #fbf9f4;
+  --line: #dfd8c8;
+  --ink: #2b2922;
+  --ink-muted: #696454;
+  --ink-glow: #49473a;
+  --rust: #ae4a30;
+  --rust-glow: #ce6c4a;
+  --rust-deep: #7f3521;
+  --rust-text: #9f4128;
+  --rust-soft: #f2e1d1;
+  --rust-soft-glow: #faf0e3;
+  --on-rust-soft: #5c3423;
+  --peach-100: #f2e9da;
+  --peach-200: #ebe0ce;
+  --peach-300: #e1d4bf;
+  --frost: rgba(251, 249, 244, .66);
+  --frost-edge: rgba(255, 255, 255, .94);
+  --frost-media: rgba(251, 249, 244, .82);
+  --focus: #9f4128;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-theme { transition-duration: 0ms; }
+}
